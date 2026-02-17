@@ -1,0 +1,11 @@
+.vscode/
+
+xcelium.d/
+.simvision/
+waves.shm/
+.bpad/
+*.history
+*.log
+xmverilog.key
+*.diag
+*.err
