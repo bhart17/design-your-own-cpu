@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+xmverilog -q +gui +access+r +tcl+testbench.tcl inv1.sv and2.sv or2.sv xor2.sv testbench.sv

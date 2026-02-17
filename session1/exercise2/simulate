@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+xmverilog -q full_adder.sv testbench.sv
