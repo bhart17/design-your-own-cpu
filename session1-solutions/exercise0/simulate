@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+xmverilog -q hello_world.sv
