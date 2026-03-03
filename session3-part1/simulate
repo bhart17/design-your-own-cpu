@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+PROJ_DIR=$(git rev-parse --show-toplevel)
+
+echo
+xmverilog +xmnowarn+DSEM2009 +xmnowarn+DSEMEL -q -clean -y ${PROJ_DIR}/session3-part1/design/ -y ${PROJ_DIR}/session3-part1/design/system/ +libext+.sv +incdir+${PROJ_DIR}/session3-part1/design/ ${PROJ_DIR}/session3-part1/testbench/system_tb.sv
+echo
