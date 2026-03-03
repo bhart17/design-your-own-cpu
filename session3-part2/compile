@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+PROJ_DIR=$(git rev-parse --show-toplevel)
+
+echo
+
+riscv32-unknown-elf-gcc --version
+
+riscv32-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostartfiles -static -flto -O2 -T${PROJ_DIR}/session3-part2/software/link.ld -o ${PROJ_DIR}/session3-part2/software/build/code.elf ${PROJ_DIR}/session3-part2/software/src/runtime/start.s ${PROJ_DIR}/session3-part2/software/src/runtime/crt0.c ${PROJ_DIR}/session3-part2/software/src/*.c
+
+riscv32-unknown-elf-objdump -d ${PROJ_DIR}/session3-part2/software/build/code.elf > ${PROJ_DIR}/session3-part2/software/build/code.lst
+
+riscv32-unknown-elf-objcopy --version
+
+riscv32-unknown-elf-objcopy -O ihex ${PROJ_DIR}/session3-part2/software/build/code.elf ${PROJ_DIR}/session3-part2/software/build/code.ihex
+
+/opt/cad/bim/c/hex2v/hex2v_soc ${PROJ_DIR}/session3-part2/software/build/code.ihex 4 > ${PROJ_DIR}/session3-part2/software/build/code.hex
+
+echo

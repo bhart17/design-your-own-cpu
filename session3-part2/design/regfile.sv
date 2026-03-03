@@ -1,0 +1,36 @@
+module regfile (
+    input  logic [ 4:0] rs1_address,
+    output logic [31:0] rs1_read_data,
+
+    input  logic [ 4:0] rs2_address,
+    output logic [31:0] rs2_read_data,
+
+    input logic [ 4:0] rd_address,
+    input logic        rd_write_enable,
+    input logic [31:0] rd_write_data,
+
+    input logic clock,
+    input logic n_reset
+);
+
+    timeunit 1ns; timeprecision 100ps;
+
+    logic [31:0] registers[31:0];
+
+    always_ff @(posedge clock, negedge n_reset) begin
+        if (!n_reset) registers <= '{default: '0};
+        else if (rd_write_enable && rd_address != 5'd0) begin
+            registers[rd_address] <= rd_write_data;
+        end
+    end
+
+    assign rs1_read_data = (rs1_address == 5'd0) ? 32'd0 :
+                           // add forwarding here
+
+                           registers[rs1_address];
+    assign rs2_read_data = (rs2_address == 5'd0) ? 32'd0 :
+                            // add forwarding here
+
+                           registers[rs2_address];
+
+endmodule
